@@ -19,7 +19,9 @@ return new class extends Migration
             $table->integer('transactions')->nullable();
             $table->text('description');
             $table->string('title');
-            $table->dateTime('deadline');
+            $table->dateTime('deadline')->nullable();
+            $table->integer('goal')->nullable();
+            $table->integer('raised')->nullable();
             $table->string('image')->nullable();
             $table->integer('priority');
             $table->timestamps();
