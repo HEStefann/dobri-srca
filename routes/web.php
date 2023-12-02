@@ -29,3 +29,8 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+// route for dashboardnew.blade.php
+Route::get('/dashboardnew' , function () {
+    return view('dashboardnew');
+});
