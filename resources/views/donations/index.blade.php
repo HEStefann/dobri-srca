@@ -497,48 +497,42 @@
                                     <tr
                                         class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                                         <th class="px-4 py-3">Client</th>
-                                        <th class="px-4 py-3">Phone</th>
-                                        <th class="px-4 py-3">Donated</th>
-                                        <th class="px-4 py-3">Role</th>
+                                        <th class="px-4 py-3">Name for donation</th>
+                                        <th class="px-4 py-3">Amount</th>
+                                        <th class="px-4 py-3">Socially endangered</th>
+                                        <th class="px-4 py-3">Approved</th>
+                                        <th class="px-4 py-3">Status</th>
                                         <th class="px-4 py-3">Created at</th>
                                         <th class="px-4 py-3">ACTIONS</th>
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                                    @foreach ($users as $user)
+                                    @foreach ($donations as $donation)
                                         <tr class="text-gray-700 dark:text-gray-400">
-                                            <td class="px-4 py-3">
-                                                <div class="flex items-center text-sm">
-                                                    <!-- Avatar with inset shadow -->
-                                                    <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-                                                        <img class="object-cover w-full h-full rounded-full"
-                                                            {{-- 2 leeters to be present 1 from user name and another one from surname make them upprcase --}}
-                                                            src="https://avatar.oxro.io/avatar.svg?name={{ strtoupper($user->name[0]) }} + {{ strtoupper($user->surname[0]) }}&background=ff6b6b&caps=3&bold=true"
-                                                            alt="" loading="lazy" />
-                                                        <div class="absolute inset-0 rounded-full shadow-inner"
-                                                            aria-hidden="true"></div>
-                                                    </div>
-                                                    <div>
-                                                        <p class="font-semibold">{{ $user->name . ' ' . $user->surname ?? '' }}
-                                                        </p>
-                                                    </div>
-                                                </div>
+                                            <td class="px-4 py-3 text-xs">
+                                                {{ $donation->user->name }}
                                             </td>
                                             <td class="px-4 py-3 text-xs">
-                                                {{ $user->phone_number ?? 'No phone' }}
+                                                {{ $donation->name_for_donation }}
                                             </td>
                                             <td class="px-4 py-3 text-sm">
-                                                {{ $user->donated }} мкд.
+                                                {{ $donation->amount }} мкд.
                                             </td>
                                             <td class="px-4 py-3 text-sm">
-                                                {{ $user->role ?? 'No role' }}
+                                                {{ $donation->sociallyEndangered->name . ' ' . $donation->sociallyEndangered->surname }}
                                             </td>
                                             <td class="px-4 py-3 text-sm">
-                                                {{ $user->created_at->format('d/m/Y') }}
+                                                {{ $donation->approval ? 'Yes' : 'No' }}
+                                            </td>
+                                            <td class="px-4 py-3 text-sm">
+                                                {{ $donation->status }}
+                                            </td>
+                                            <td class="px-4 py-3 text-sm">
+                                                {{ $donation->created_at }}
                                             </td>
                                             <td class="px-4 py-3">
                                                 <div class="flex items-center space-x-4 text-sm">
-                                                    <a href="{{ route('users.edit', $user->id) }}"
+                                                    <a href="{{ route('donation.edit', $donation->id) }}"
                                                         class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                                                         aria-label="Edit">
                                                         <svg class="w-5 h-5" aria-hidden="true" fill="currentColor"
@@ -548,7 +542,8 @@
                                                             </path>
                                                         </svg>
                                                     </a>
-                                                    <form method="POST" action="{{ route('users.destroy', $user->id) }}"
+                                                    <form method="POST"
+                                                        action="{{ route('donation.destroy', $donation->id) }}"
                                                         onsubmit="return confirm('Are you sure?')"
                                                         class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
                                                         @csrf
@@ -575,7 +570,8 @@
                         <div
                             class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
                             <span class="flex items-center col-span-3">
-                                Showing {{ $users->firstItem() }}-{{ $users->lastItem() }} of {{ $users->total() }}
+                                Showing {{ $donations->firstItem() }}-{{ $donations->lastItem() }} of
+                                {{ $donations->total() }}
                             </span>
                             <span class="col-span-2"></span>
                             <!-- Pagination -->
@@ -583,7 +579,7 @@
                                 <nav aria-label="Table navigation">
                                     <ul class="inline-flex items-center">
                                         <li>
-                                            @if ($users->onFirstPage())
+                                            @if ($donations->onFirstPage())
                                                 <button
                                                     class="px-3 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple"
                                                     aria-label="Previous" disabled>
@@ -595,7 +591,7 @@
                                                     </svg>
                                                 </button>
                                             @else
-                                                <a href="{{ $users->previousPageUrl() }}"
+                                                <a href="{{ $donations->previousPageUrl() }}"
                                                     class="px-3 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple"
                                                     aria-label="Previous">
                                                     <svg class="w-4 h-4 fill-current" aria-hidden="true"
@@ -607,9 +603,9 @@
                                                 </a>
                                             @endif
                                         </li>
-                                        @foreach ($users->getUrlRange(1, $users->lastPage()) as $page => $url)
+                                        @foreach ($donations->getUrlRange(1, $donations->lastPage()) as $page => $url)
                                             <li>
-                                                @if ($page == $users->currentPage())
+                                                @if ($page == $donations->currentPage())
                                                     <button
                                                         class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple font-semibold text-purple-600"
                                                         aria-current="page">
@@ -624,8 +620,8 @@
                                             </li>
                                         @endforeach
                                         <li>
-                                            @if ($users->hasMorePages())
-                                                <a href="{{ $users->nextPageUrl() }}"
+                                            @if ($donations->hasMorePages())
+                                                <a href="{{ $donations->nextPageUrl() }}"
                                                     class="px-3 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple"
                                                     aria-label="Next">
                                                     <svg class="w-4 h-4 fill-current" aria-hidden="true"

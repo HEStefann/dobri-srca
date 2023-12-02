@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\DonationController;
+use App\Http\Controllers\CardIdController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SubscriptionsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,6 +47,26 @@ Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.e
 Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
 Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 
+// View all users
+Route::get('/donations', [DonationController::class, 'index'])->name('donation.index');
+
+// Edit user information
+Route::get('/donation/{donation}/edit', [DonationController::class, 'edit'])->name('donation.edit');
+Route::put('/donation/{donation}', [DonationController::class, 'update'])->name('donation.update');
+Route::delete('/donation/{donation}', [DonationController::class, 'destroy'])->name('donation.destroy');
+// View all Card
+Route::get('/cardid', [CardIdController::class, 'index'])->name('cardid.index');
+// Edit cardid information
+Route::get('/cardid/{cardid}/edit', [CardIdController::class, 'edit'])->name('card_ids.edit');
+Route::put('/cardid/{cardid}', [CardIdController::class, 'update'])->name('card_ids.update');
+Route::delete('/cardid/{cardid}', [CardIdController::class, 'destroy'])->name('card_ids.destroy');
+
+// View all Card
+Route::get('/subscriptions', [SubscriptionsController::class, 'index'])->name('cardid.index');
+// Edit cardid information
+Route::get('/subscriptions/{subscriptions}/edit', [SubscriptionsController::class, 'edit'])->name('subscriptions.edit');
+Route::put('/subscriptions/{subscriptions}', [SubscriptionsController::class, 'update'])->name('subscriptions.update');
+Route::delete('/subscriptions/{subscriptions}', [SubscriptionsController::class, 'destroy'])->name('subscriptions.destroy');
 
 // // Manage user roles (assuming roles are managed in a separate controller)
 // Route::get('/users/{user}/manage-roles', [UserRoleController::class, 'edit'])->name('users.manageRoles');
