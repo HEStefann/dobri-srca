@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('donations', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->string('name_for_donation');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->string('name_for_donation')->nullable();
             $table->unsignedBigInteger('socially_endangered_id')->nullable();
-            $table->decimal('amount', 10, 2);
-            $table->boolean('paid');
-            $table->boolean('approval')->default(true);
-            $table->enum('status', ['in_bank', 'waiting', 'donated', 'declined', 'refunded']);
+            $table->decimal('amount', 10, 2)->nullable();
+            $table->boolean('paid')->nullable();
+            $table->boolean('approval')->default(true)->nullable();
+            $table->enum('status', ['in_bank', 'waiting', 'donated', 'declined', 'refunded'])->nullable();
             $table->timestamps();
             
             $table->foreign('socially_endangered_id')->references('id')->on('socially_endangereds');
