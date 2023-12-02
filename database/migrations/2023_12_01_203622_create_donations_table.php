@@ -21,7 +21,7 @@ return new class extends Migration
             $table->boolean('approval')->default(true)->nullable();
             $table->enum('status', ['in_bank', 'waiting', 'donated', 'declined', 'refunded'])->nullable();
             $table->timestamps();
-            
+            $table->softDeletes();
             $table->foreign('socially_endangered_id')->references('id')->on('socially_endangereds');
             $table->foreign('user_id')->references('id')->on('users');
         });
