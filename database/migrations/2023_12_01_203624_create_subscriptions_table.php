@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('subscriptions', function (Blueprint $table) {
             $table->id();
-            $table->decimal('amount', 10, 2);
+            $table->decimal('amount', 10, 2)->nullable();
+            $table->date('execution_date')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('card_id');
             $table->timestamps();
