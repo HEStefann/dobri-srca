@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,3 +35,14 @@ require __DIR__.'/auth.php';
 Route::get('/dashboardnew' , function () {
     return view('dashboardnew');
 });
+
+// View all users
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
+
+// Edit user information
+Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
+
+// // Manage user roles (assuming roles are managed in a separate controller)
+// Route::get('/users/{user}/manage-roles', [UserRoleController::class, 'edit'])->name('users.manageRoles');
+// Route::put('/users/{user}/manage-roles', [UserRoleController::class, 'update'])->name('users.updateRoles');
