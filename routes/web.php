@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\DonationController;
+use App\Http\Controllers\DontaionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -44,6 +46,13 @@ Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.e
 Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
 Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 
+// View all users
+Route::get('/donations', [DonationController::class, 'index'])->name('donation.index');
+
+// Edit user information
+Route::get('/donation/{donation}/edit', [DonationController::class, 'edit'])->name('donation.edit');
+Route::put('/donation/{donation}', [DonationController::class, 'update'])->name('donation.update');
+Route::delete('/donation/{donation}', [DonationController::class, 'destroy'])->name('donation.destroy');
 
 // // Manage user roles (assuming roles are managed in a separate controller)
 // Route::get('/users/{user}/manage-roles', [UserRoleController::class, 'edit'])->name('users.manageRoles');
