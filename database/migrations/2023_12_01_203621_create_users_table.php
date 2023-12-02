@@ -19,11 +19,13 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('phone_number')->nullable();
-            $table->unsignedBigInteger('role_id')->nullable();
+            $table->boolean('anonymous')->default(false);
+            $table->string('image')->nullable();
+            $table->boolean('donated')->default(false);
+            $table->enum('role', ['admin', 'user'])->default('user');
             $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();
-            
-            $table->foreign('role_id')->references('id')->on('roles');
         });
     }
 

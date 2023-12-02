@@ -9,7 +9,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+        $users = User::paginate(10);
         return view('users.index', ['users' => $users]);
     }
 
@@ -23,4 +23,10 @@ class UserController extends Controller
         $user->update($request->all());
         return redirect()->route('users.index')->with('success', 'User updated successfully!');
     }
+    public function destroy(User $user)
+    {
+        $user->delete();
+        return redirect()->route('users.index')->with('success', 'User deleted successfully!');
+    }
+
 }

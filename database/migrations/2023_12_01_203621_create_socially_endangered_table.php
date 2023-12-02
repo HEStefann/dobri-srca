@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('priority')->nullable();
             $table->decimal('goal', 10, 2)->nullable();
             $table->decimal('raised', 10, 2)->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

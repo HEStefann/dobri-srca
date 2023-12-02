@@ -42,6 +42,8 @@ Route::get('/users', [UserController::class, 'index'])->name('users.index');
 // Edit user information
 Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
 Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
+Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+
 
 // // Manage user roles (assuming roles are managed in a separate controller)
 // Route::get('/users/{user}/manage-roles', [UserRoleController::class, 'edit'])->name('users.manageRoles');
