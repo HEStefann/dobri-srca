@@ -13,17 +13,17 @@ return new class extends Migration
     {
         Schema::create('socially_endangereds', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('surname');
-            $table->string('phone');
+            $table->string('name')->nullable();
+            $table->string('surname')->nullable();
+            $table->string('phone')->nullable();
             $table->text('transactions')->nullable();
-            $table->text('description');
-            $table->string('title');
-            $table->date('deadline');
+            $table->text('description')->nullable();
+            $table->string('title')->nullable();
+            $table->date('deadline')->nullable();
             $table->string('image')->nullable();
-            $table->string('priority');
-            $table->decimal('goal', 10, 2);
-            $table->decimal('raised', 10, 2);
+            $table->string('priority')->nullable();
+            $table->decimal('goal', 10, 2)->nullable();
+            $table->decimal('raised', 10, 2)->nullable();
             $table->timestamps();
         });
     }
