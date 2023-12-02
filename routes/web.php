@@ -51,10 +51,11 @@ Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.
 Route::get('/donations', [DonationController::class, 'index'])->name('donation.index');
 
 // Edit user information
-Route::get('/donation/{donation}/edit', [DonationController::class, 'edit'])->name('donation.edit');
-Route::put('/donation/{donation}', [DonationController::class, 'update'])->name('donation.update');
-Route::delete('/donation/{donation}', [DonationController::class, 'destroy'])->name('donation.destroy');
+Route::get('/donations/{donation}/edit', [DonationController::class, 'edit'])->name('donations.edit');
+Route::put('/donations/{donation}', [DonationController::class, 'update'])->name('donations.update');
+Route::delete('/donations/{donation}', [DonationController::class, 'destroy'])->name('donations.destroy');
 // View all Card
+
 Route::get('/cardid', [CardIdController::class, 'index'])->name('cardid.index');
 // Edit cardid information
 Route::get('/cardid/{cardid}/edit', [CardIdController::class, 'edit'])->name('card_ids.edit');
@@ -62,7 +63,7 @@ Route::put('/cardid/{cardid}', [CardIdController::class, 'update'])->name('card_
 Route::delete('/cardid/{cardid}', [CardIdController::class, 'destroy'])->name('card_ids.destroy');
 
 // View all Card
-Route::get('/subscriptions', [SubscriptionsController::class, 'index'])->name('cardid.index');
+Route::get('/subscriptions', [SubscriptionsController::class, 'index'])->name('subscriptions.index');
 // Edit cardid information
 Route::get('/subscriptions/{subscriptions}/edit', [SubscriptionsController::class, 'edit'])->name('subscriptions.edit');
 Route::put('/subscriptions/{subscriptions}', [SubscriptionsController::class, 'update'])->name('subscriptions.update');

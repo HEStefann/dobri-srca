@@ -15,7 +15,7 @@ class DonationController extends Controller
 
     public function edit(Donation $donation)
     {
-        return view('donations.edit', ['donation$donation' => $donation]);
+        return view('donations.edit', ['donation' => $donation]);
     }
 
     public function update(Request $request, Donation $donation)
