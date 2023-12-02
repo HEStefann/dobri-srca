@@ -19,7 +19,7 @@ return new class extends Migration
             $table->decimal('amount', 10, 2);
             $table->boolean('paid');
             $table->boolean('approval')->default(true);
-            $table->string('status');
+            $table->enum('status', ['in_bank', 'waiting', 'donated', 'declined', 'refunded']);
             $table->timestamps();
             
             $table->foreign('socially_endangered_id')->references('id')->on('socially_endangereds');
