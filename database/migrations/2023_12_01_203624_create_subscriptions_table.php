@@ -16,10 +16,10 @@ return new class extends Migration
             $table->decimal('amount', 10, 2);
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('card_id');
+            $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('card_id')->references('id')->on('card_ids');
-            $table->timestamps();
         });
     }
 

@@ -15,15 +15,15 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('name_for_donation');
-            $table->unsignedBigInteger('linked_donation')->nullable();
+            $table->unsignedBigInteger('socially_endangered_id')->nullable();
             $table->decimal('amount', 10, 2);
             $table->boolean('paid');
-            $table->boolean('approval');
+            $table->boolean('approval')->default(true);
             $table->string('status');
             $table->timestamps();
-
+            
+            $table->foreign('socially_endangered_id')->references('id')->on('socially_endangereds');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('linked_donation')->references('id')->on('donations');
         });
     }
 

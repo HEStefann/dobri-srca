@@ -11,19 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('socially_endangered', function (Blueprint $table) {
+        Schema::create('socially_endangereds', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('surname');
             $table->string('phone');
-            $table->integer('transactions')->nullable();
+            $table->text('transactions')->nullable();
             $table->text('description');
             $table->string('title');
-            $table->dateTime('deadline')->nullable();
-            $table->integer('goal')->nullable();
-            $table->integer('raised')->nullable();
+            $table->date('deadline');
             $table->string('image')->nullable();
-            $table->integer('priority');
+            $table->string('priority');
+            $table->decimal('goal', 10, 2);
+            $table->decimal('raised', 10, 2);
             $table->timestamps();
         });
     }
